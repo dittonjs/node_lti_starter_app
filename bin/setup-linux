@@ -1,4 +1,4 @@
-!/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Run this script using `sudo ./setup-linux`
 set -o nounset

@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 const App = () => {
-    const myName = "Joseph";
-    debugger
     return (
         <div>
             <img id="usu-logo" src="/vertical_logo_blue.png" />
