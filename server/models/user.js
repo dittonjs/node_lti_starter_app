@@ -28,6 +28,7 @@ class User {
 
   toDoc() {
     return {
+      _id: this.id,
       name: this.name,
       email: this.email,
       lmsUserId: this.lmsUserId,

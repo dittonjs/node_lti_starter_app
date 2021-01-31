@@ -33,13 +33,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/lti_launches', (req, res) => {
-  console.log(req.session);
+  console.log(req.jwt);
+  console.log(req.session.launchInfo);
+  console.log(req.currentUser.toDoc());
   res.render("index", {
-    isLti: true,
+    data: {
+      launchInfo: req.session.launchInfo,
+      user: req.currentUser.toDoc(),
+      jwt: req.jwt,
+    }
   });
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`App listening at http://localhost:${port}`);
 });
 

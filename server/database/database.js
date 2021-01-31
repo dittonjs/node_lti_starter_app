@@ -1,7 +1,7 @@
 const { MongoClient, Db } = require("mongodb");
 const User = require("../models/user");
 class Database {
-  async findOrCreateUserFromLTI(launchInfo, callback) {
+  async findOrCreateUserFromLTI(launchInfo) {
     const client = await MongoClient.connect(`mongodb://localhost:27017`);
     
     const db = client.db(process.env.DB_NAME);
@@ -12,12 +12,11 @@ class Database {
       
     if (!user) {
       const result = await db.collection("users").insertOne(User.newFromLtiLaunch(launchInfo).toDoc());
-      console.log("A new user was created!!", result);
-      callback(User.fromDoc(result.ops[0]));
-    } else {
-      console.log("User already exists", user)
-      callback(User.fromDoc(user));
+      return User.fromDoc(result.ops[0]);
     }
+
+    return User.fromDoc(user);
+    
   }
 }
 

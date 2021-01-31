@@ -2,8 +2,15 @@
     <head>
         <script type="text/javascript">
             window.DEFAULT_SETTINGS = {
-                isLti: <%= isLti %>
+                lmsUserId: <%= data.launchInfo.userId %>,
+                userId: "<%= data.user._id %>",
+                userName: "<%= data.user.name %>",
+                roles: "<%= data.user.roles %>",
+                email: "<%= data.user.email %>",
+                isInstructor: <%= data.launchInfo.isInstructor %>,
+                courseId: <%= data.launchInfo.courseId %>                
             };
+            window.DEFAULT_JWT = "<%= data.jwt %>";
         </script>
     </head>
     <body>
