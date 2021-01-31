@@ -1,5 +1,4 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
 
 const morgan = require('morgan')
 const express = require('express');
@@ -39,16 +38,4 @@ app.get('/lti_launches', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
-
-const sequelize = new Sequelize('node_lti_starter', null, null, {
-  host: 'localhost',
-  dialect: 'postgres'
-});
-
-sequelize.authenticate().then(() => {
-  console.log('Connection has been established successfully.');
-}).catch((error) => {
-  console.error('Unable to connect to the database:', error);
-});
-
 
