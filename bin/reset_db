@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+export $(cat .env | xargs)
+(dropdb nodeltistarterapp)
+createdb nodeltistarterapp
+yarn migrate

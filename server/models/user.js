@@ -1,42 +1,34 @@
-const uuid = require("uuid");
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  };
 
-// TODO: validate models
-class User {
+  User.init({
 
-  static fromDoc(doc) {
-    const user = new User();
-    user.id = doc._id;
-    user.name = doc.name;
-    user.email = doc.email;
-    user.lmsUserId = doc.lmsUserId;
-    user.imageLink = doc.imageLink;
-    user.loginId = doc.loginId;
-    user.roles = doc.roles;
-    return user;
-  }
-
-  static newFromLtiLaunch(launchInfo) {
-    const user = new User();
-    user.name = launchInfo.userFullName;
-    user.email = launchInfo.userEmail;
-    user.lmsUserId = launchInfo.userId;
-    user.imageLink = launchInfo.userImage;
-    user.loginId = launchInfo.userLoginId;
-    user.roles = launchInfo.extRoles;
-    return user;
-  }
-
-  toDoc() {
-    return {
-      _id: this.id,
-      name: this.name,
-      email: this.email,
-      lmsUserId: this.lmsUserId,
-      imageLink: this.imageLink,
-      loginId: this.loginId,
-      roles: this.roles,
-    };
-  }
-}
-
-module.exports = User;
+    id: {
+      type: DataTypes.NUMBER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true,
+    },
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    lmsUserId: DataTypes.NUMBER,
+    
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+  return User;
+};
