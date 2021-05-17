@@ -5,7 +5,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const router = require("./server/router/router");
 
-const port = parseInt(process.env.APP_PORT, 10);
+const port = parseInt(process.env.PORT, 10) || parseInt(process.env.APP_PORT, 10);
 
 const app = express();
 
@@ -34,7 +34,9 @@ app.get('/', (req, res) => {
 
 router(app);
 
-app.listen(port, () => {
+const http = require("http").createServer(app);
+
+http.listen(port, '0.0.0.0', () => {
   console.log(`App listening at http://localhost:${port}`);
 });
 
