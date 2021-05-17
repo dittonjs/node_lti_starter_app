@@ -3,15 +3,11 @@ const morgan = require('morgan')
 const express = require('express');
 const path = require("path");
 const bodyParser = require("body-parser");
-const session = require('express-session');
-const { setupLti } = require("./server/lib/lti_support");
 const router = require("./server/router/router");
 
 const port = parseInt(process.env.APP_PORT, 10);
 
 const app = express();
-
-app.use(session({secret: "secret", resave: false, saveUninitialized: true}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,10 +31,6 @@ app.get('/', (req, res) => {
     isLti: false,
   });
 });
-
-// app.get('/lti_launches', (req, res) => {
-  
-// });
 
 router(app);
 

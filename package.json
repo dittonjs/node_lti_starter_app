@@ -11,14 +11,13 @@
     "build": "parcel build client/index.js",
     "server": "nodemon index.js",
     "migrate": "cd server && npx sequelize-cli db:migrate",
-    "console": "node repl.js"
+    "console": "node repl.js --experimental-repl-await"
   },
   "dependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "body-parser": "^1.19.0",
-    "caccl-lti": "^1.1.6",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
@@ -28,6 +27,7 @@
     "lodash": "^4.17.21",
     "mongodb": "^3.6.3",
     "morgan": "^1.10.0",
+    "node-repl-await": "^0.1.2",
     "oauth-signature": "^1.5.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",

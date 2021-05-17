@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const Controller = require("./controller");
 const { isValidRequest } = require("../lib/lti_support");
 const { User, Nonce } = require("../models"); 
@@ -20,18 +21,35 @@ module.exports = class LtiLaunchesController extends Controller {
       if (!isValid) {
         res.status(401).send("LTI Signature Invalid");
       } else {
-        console.log(req.body);
+        // create user
+        const user = await User.fromLTI(req.body)
+        req.currentUser = user;
+
+        req.jwt = jwt.sign({
+          userId: user.id,
+          lmsUserId: user.lmsUserId,
+          roles: req.body.ext_roles,
+          courseId: req.body.custom_canvas_course_id,
+          name: user.name,
+          context_id: req.body.context_id,
+          isInstructor: await user.isInstructor(req.body.context_id),
+          isTA: await user.isTA(req.body.context_id),
+        }, 
+        process.env.SECRET_KEY,
+        {
+          expiresIn: "2 days",
+        });
         next();
       }
+
     });
   }
 
   index(req, res) {
     console.log(req.jwt);
-    console.log(req.session.launchInfo);
     res.render("index", {
       data: {
-        launchInfo: req.session.launchInfo,
+        launchParams: req.body,
         user: req.currentUser.toJSON(),
         jwt: req.jwt,
       }
