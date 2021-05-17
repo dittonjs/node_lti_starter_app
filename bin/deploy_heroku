@@ -21,3 +21,5 @@ set -o pipefail
 # git commit -m "parent sha: [$SHA] add precompile files"
 
 git push -f heroku main
+heroku run yarn migrate
+
