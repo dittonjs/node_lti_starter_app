@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": "nodeltistarterapp",
+    "password": "nodeltistarterapp",
+    "database": "nodeltistarterapp",
+    "host": "localhost",
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
+  },
+  "production": {
+    "database": "nodeltistarterapp",
+    "host": "localhost",
+    "dialect": "postgres",
+    "use_env_variable": "DATABASE_URL"
+  }
+}
