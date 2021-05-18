@@ -1,4 +1,4 @@
-var express = require('express')
+const express = require('express');
 
 module.exports = (ControllerClass, customPaths = []) => {
   const router = express.Router()
@@ -6,9 +6,9 @@ module.exports = (ControllerClass, customPaths = []) => {
   controller.init(router);
   router.get("/", (req, res) => controller.index(req, res));
   router.get('/:id', (req, res) => controller.show(req, res));
-  router.post('/', (req, res) => controller.index(req, res));
-  router.put('/:id', (req, res) => controller.index(req, res));
-  router.delete('/:id', (req, res) => controller.index(req, res));
+  router.post('/', (req, res) => controller.create(req, res));
+  router.put('/:id', (req, res) => controller.update(req, res));
+  router.delete('/:id', (req, res) => controller.destroy(req, res));
 
   customPaths.forEach(customPath => {
     router[customPath.method](customPath.path, (req, res) => controller[customPath.handler](req, res));

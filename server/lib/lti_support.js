@@ -22,6 +22,23 @@ const isValidRequest = (req) => {
   return (generatedSignature === req.body.oauth_signature);
 }
 
+const contentItems =  (graph) => {
+  return {
+    '@context': 'http://purl.imsglobal.org/ctx/lti/v1/ContentItem',
+    '@graph': graph
+  };
+}
+
+function ltiLaunchContentItem(title, url) {
+  return contentItems([{
+    '@type': 'LtiLinkItem',
+    mediaType: 'application/vnd.ims.lti.v1.ltilink',
+    url,
+    title
+  }]);
+}
+
 module.exports = {
   isValidRequest,
+  ltiLaunchContentItem
 };

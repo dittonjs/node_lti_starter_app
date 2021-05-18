@@ -1,11 +1,13 @@
 const jwt = require('jsonwebtoken');
 const Controller = require("./controller");
 const { isValidRequest } = require("../lib/lti_support");
+const { verifyJWT } = require('../lib/jwt_support');
 const { User, Nonce } = require("../models"); 
+const { response } = require('express');
 
 module.exports = class LtiLaunchesController extends Controller {
   init(router) {
-    router.use('/', async (req, res, next) => {
+    const handleLti = async (req, res, next) => {
       // Validates nonce
       try {
         await Nonce.validateNonce(req.body.oauth_nonce); 
@@ -22,6 +24,7 @@ module.exports = class LtiLaunchesController extends Controller {
         res.status(401).send("LTI Signature Invalid");
       } else {
         // create user
+        console.log(req.body);
         const user = await User.fromLTI(req.body)
         req.currentUser = user;
 
@@ -42,7 +45,10 @@ module.exports = class LtiLaunchesController extends Controller {
         next();
       }
 
-    });
+    }
+    router.use('/', handleLti);
+    router.use('/:id', handleLti);
+    // router.post('/', verifyJWT);
   }
 
   index(req, res) {
@@ -57,6 +63,10 @@ module.exports = class LtiLaunchesController extends Controller {
   }
 
   show(req, res) {
+    res.send("I am show")
+  }
 
+  create(req, res) {
+    this.index(req, res);
   }
 }

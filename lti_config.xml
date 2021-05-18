@@ -8,15 +8,23 @@
   <blti:extensions platform="canvas.instructure.com">
     <lticm:options name="course_navigation">
       <lticm:property name="default">enabled</lticm:property>
-      <lticm:property name="text">LTI Starter App</lticm:property>
+      <lticm:property name="text">LTI Starter App DEV</lticm:property>
       <lticm:property name="url">https://nodeltistarterapp.atomicjolt.xyz/lti_launches</lticm:property>
       <lticm:property name="visibility">admins</lticm:property>
       <lticm:property name="windowTarget"/>
     </lticm:options>
+    <lticm:options name="assignment_selection">
+      <lticm:property name="canvas_icon_class">icon-lti</lticm:property>
+      <lticm:property name="icon_url">https://nodeltistarterapp.atomicjolt.xyz/assignment_selection.png</lticm:property>
+      <lticm:property name="message_type">ContentItemSelectionRequest</lticm:property>
+      <lticm:property name="text">LTI Starter App DEV</lticm:property>
+      <lticm:property name="url">https://nodeltistarterapp.atomicjolt.xyz/lti_launches</lticm:property>
+    </lticm:options>
     <lticm:options name="custom_fields">
       <lticm:property name="canvas_api_domain">$Canvas.api.domain</lticm:property>
       <lticm:property name="canvas_course_id">$Canvas.course.id</lticm:property>
-      <lticm:property name="custom_canvas_api_domain">$Canvas.api.domain</lticm:property>
+      <lticm:property name="canvas_user_id">$Canvas.user.id</lticm:property>
+      <lticm:property name="canvas_assignment_due_at">$Canvas.assignment.dueAt.iso8601</lticm:property>
     </lticm:options>
     <lticm:property name="domain">nodeltistarterapp.atomicjolt.xyz</lticm:property>
     <lticm:property name="privacy_level">public</lticm:property>
