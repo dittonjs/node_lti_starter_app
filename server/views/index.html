@@ -2,12 +2,13 @@
     <head>
         <script type="text/javascript">
             window.DEFAULT_SETTINGS = {
-                lmsUserId: <%= data.user.lmsUserId %>,
-                userId: <%= data.user.id %>,
-                userName: "<%= data.user.name %>",
+                lms_user_id: <%= data.user.lmsUserId %>,
+                user_id: <%= data.user.id %>,
+                user_name: "<%= data.user.name %>",
                 roles: "<%= data.launchParams.ext_roles %>",
                 email: "<%= data.user.email %>",
-                courseId: <%= data.launchParams.custom_canvas_course_id %>                
+                course_id: <%= data.launchParams.custom_canvas_course_id %>,
+                content_item_return_url: "<%= data.launchParams.content_item_return_url %>"               
             };
             window.DEFAULT_JWT = "<%= data.jwt %>";
         </script>

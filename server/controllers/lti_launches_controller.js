@@ -29,14 +29,15 @@ module.exports = class LtiLaunchesController extends Controller {
         req.currentUser = user;
 
         req.jwt = jwt.sign({
-          userId: user.id,
-          lmsUserId: user.lmsUserId,
+          user_id: user.id,
+          lms_user_id: user.lmsUserId,
           roles: req.body.ext_roles,
-          courseId: req.body.custom_canvas_course_id,
+          course_id: req.body.custom_canvas_course_id,
+          content_item_return_url: req.body.content_item_return_url,
           name: user.name,
           context_id: req.body.context_id,
-          isInstructor: await user.isInstructor(req.body.context_id),
-          isTA: await user.isTA(req.body.context_id),
+          is_instructor: await user.isInstructor(req.body.context_id),
+          is_ta: await user.isTA(req.body.context_id),
         }, 
         process.env.SECRET_KEY,
         {
