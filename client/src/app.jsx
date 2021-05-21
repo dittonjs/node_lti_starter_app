@@ -22,7 +22,9 @@ const App = () => {
     .then(setContentItem);
   }
   console.log(contentItem);
-
+  if (window.DEFAULT_SETTINGS.test_launch_value) {
+    return <div>${window.DEFAULT_SETTINGS.test_launch_value}</div>
+  }
   if (contentItem) {
     return <ContentItemSelectionForm contentItem={contentItem} />
   }

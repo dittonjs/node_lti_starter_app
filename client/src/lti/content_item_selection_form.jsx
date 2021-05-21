@@ -10,8 +10,8 @@ export default ({ contentItem }) => {
   return (
     <form ref={formEl} method="post" action={contentItemReturnUrl} encType="application/x-www-form-urlencoded">
       {
-        _.map(contentItem, (key, value) => (
-          <input hidden name={key} value={value} />
+        _.map(contentItem, (value, key) => (
+          <input type="hidden" name={key} value={value} key={key}/>
         ))
       }
     </form>

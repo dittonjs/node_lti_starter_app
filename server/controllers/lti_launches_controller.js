@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const Controller = require("./controller");
 const { isValidRequest } = require("../lib/lti_support");
 const { verifyJWT } = require('../lib/jwt_support');
-const { User, Nonce } = require("../models"); 
+const { User, Nonce, LtiLaunch } = require("../models"); 
 const { response } = require('express');
 
 module.exports = class LtiLaunchesController extends Controller {
@@ -47,8 +47,8 @@ module.exports = class LtiLaunchesController extends Controller {
       }
 
     }
-    router.use('/', handleLti);
-    router.use('/:id', handleLti);
+    router.post('/', handleLti);
+    router.post('/:id', handleLti);
     // router.post('/', verifyJWT);
   }
 
@@ -63,8 +63,20 @@ module.exports = class LtiLaunchesController extends Controller {
     });
   }
 
-  show(req, res) {
-    res.send("I am show")
+  async show(req, res) {
+    console.log(req.currentUser);
+    const ltiLaunch = await LtiLaunch.findOne({ where: { token: req.params.id }});
+    debugger
+    res.render("index", {
+      data: {
+        launchParams: req.body,
+        launchConfig: ltiLaunch.config,
+        user: req.currentUser.toJSON(),
+        jwt: req.jwt,
+        testLaunchValue: ltiLaunch.config.testValue,
+      }
+    });
+    // res.send("I am show")
   }
 
   create(req, res) {

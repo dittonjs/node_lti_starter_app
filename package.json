@@ -28,6 +28,7 @@
     "mongodb": "^3.6.3",
     "morgan": "^1.10.0",
     "node-repl-await": "^0.1.2",
+    "oauth-1.0a": "^2.2.6",
     "oauth-signature": "^1.5.0",
     "pg": "^8.6.0",
     "pg-hstore": "^2.3.3",
